@@ -1,1 +1,1 @@
-# snake-game
+# Snake game / Vanilla JS project
