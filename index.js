@@ -19,7 +19,7 @@ function createGrid() {
   }
 }
 createGrid();
-
+scoreDisplay.textContent = score;
 currentSnake.forEach((index) => squares[index].classList.add("snake"));
 
 function startGame() {
@@ -36,6 +36,11 @@ function startGame() {
   timerId = setInterval(move, intervalTime);
 }
 
+function endGame() {
+  clearInterval(timerId);
+  alert(`Great job! Your score is ${score} 🐍`);
+}
+
 function move() {
   if (
     (currentSnake[0] + width >= width * width && direction === width) || //if snake has hit bottom
@@ -44,7 +49,7 @@ function move() {
     (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
     squares[currentSnake[0] + direction].classList.contains("snake")
   )
-    return clearInterval(timerId);
+    return endGame();
 
   const tail = currentSnake.pop();
   squares[tail].classList.remove("snake");
@@ -83,16 +88,12 @@ generateApples();
 
 function control(e) {
   if (e.key === "ArrowRight") {
-    console.log("right pressed");
     direction = 1;
   } else if (e.key === "ArrowUp") {
-    console.log("up");
     direction = -width;
   } else if (e.key === "ArrowLeft") {
-    console.log("left");
     direction = -1;
   } else if (e.key === "ArrowDown") {
-    console.log("down");
     direction = width;
   }
 }
